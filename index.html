@@ -1,11 +1,189 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Loja de Coisas Inúteis</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    hhhhrhrhrhrhrrhr
+    <div class="aviso">⚠️ AVISO: Estes produtos são completamente inúteis! ⚠️</div>
+    
+    <header>
+        <h1>🗑️ Coisas Inúteis 🗑️</h1>
+        <p class="tagline">O lugar perfeito para gastar seu dinheiro em absolutamente nada útil</p>
+    </header>
+
+    <nav>
+        <a href="#" onclick="mostrarPagina('inicio')">Início</a>
+        <a href="#" onclick="mostrarPagina('produtos')">Produtos</a>
+        <a href="#" onclick="mostrarPagina('sobre')">Sobre</a>
+        <a href="#" onclick="mostrarPagina('contato')">Contato</a>
+    </nav>
+
+    <!-- PÁGINA INICIAL -->
+    <div id="pagina-inicio" class="pagina">
+        <div class="container">
+            <div class="destaque">
+                <h2>🎉 PROMOÇÃO IMPERDÍVEL! 🎉</h2>
+                <p>Compre algo inútil hoje e ganhe a sensação de arrependimento instantâneo!</p>
+            </div>
+
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">Nossos Produtos Mais Inúteis</h2>
+
+            <div class="produtos" id="produtos-inicio"></div>
+        </div>
+    </div>
+
+    <!-- PÁGINA PRODUTOS -->
+    <div id="pagina-produtos" class="pagina" style="display: none;">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;">Catálogo Completo de Inutilidades</h2>
+            <div class="produtos" id="produtos-catalogo"></div>
+        </div>
+    </div>
+
+    <!-- PÁGINA SOBRE -->
+    <div id="pagina-sobre" class="pagina" style="display: none;">
+        <div class="container">
+            <div class="sobre-content">
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">Sobre Nós</h2>
+                
+                <div class="sobre-box">
+                    <h3>Nossa História</h3>
+                    <p>A Loja de Coisas Inúteis nasceu de uma ideia absurda: e se vendêssemos apenas produtos completamente inúteis? Desde 2024, temos nos dedicado a curar as mais extraordinárias inutilidades do planeta.</p>
+                    <p>Nossa missão é simples: fazer você questionar suas decisões de compra enquanto ri de si mesmo. Cada produto em nosso catálogo foi cuidadosamente selecionado por sua total falta de utilidade prática.</p>
+                </div>
+
+                <div class="sobre-box">
+                    <h3>Por Que Existimos?</h3>
+                    <p>Porque nem tudo na vida precisa ser útil. Vivemos em um mundo obsessado com produtividade e funcionalidade. Nós oferecemos o oposto: uma pausa para apreciar o absurdo, o desnecessário, o magnificamente inútil.</p>
+                    <p>Nossos produtos são perfeitos para:</p>
+                    <ul>
+                        <li>Presentes de amigo secreto embaraçosos</li>
+                        <li>Decoração minimalista extrema</li>
+                        <li>Colecionadores de objetos sem propósito</li>
+                        <li>Pessoas com dinheiro sobrando</li>
+                        <li>Quem quer fazer alguém rir (ou chorar)</li>
+                    </ul>
+                </div>
+
+                <div class="sobre-box">
+                    <h3>Nossa Filosofia</h3>
+                    <p>"Se não serve para nada, então serve para nós." - Fundador anônimo</p>
+                    <p>Acreditamos que o valor de um objeto não está necessariamente em sua utilidade. Às vezes, algo é valioso simplesmente por existir e fazer você sorrir com sua completa inutilidade.</p>
+                </div>
+
+                <div class="sobre-box">
+                    <h3>Garantia de Inutilidade</h3>
+                    <p>Todos os nossos produtos vêm com nossa garantia exclusiva: se você encontrar alguma utilidade no produto, nós não nos responsabilizamos. A inutilidade não é um defeito, é uma característica!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA CONTATO -->
+    <div id="pagina-contato" class="pagina" style="display: none;">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">Entre em Contato</h2>
+            
+            <div class="contato-grid">
+                <div class="contato-form">
+                    <h3>Envie sua Mensagem Inútil</h3>
+                    <div class="form-group">
+                        <label>Nome:</label>
+                        <input type="text" placeholder="Seu nome">
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail:</label>
+                        <input type="email" placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Assunto:</label>
+                        <input type="text" placeholder="Qual inutilidade te trouxe aqui?">
+                    </div>
+                    <div class="form-group">
+                        <label>Mensagem:</label>
+                        <textarea rows="6" placeholder="Escreva sua mensagem aqui..."></textarea>
+                    </div>
+                    <button class="btn" onclick="alert('Mensagem enviada para o vazio! (não temos servidor)')">Enviar Mensagem</button>
+                </div>
+
+                <div class="contato-info">
+                    <div class="info-box">
+                        <h3>📍 Localização</h3>
+                        <p>Rua das Inutilidades, 404</p>
+                        <p>Bairro do Absurdo</p>
+                        <p>São Paulo - SP</p>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>📧 E-mail</h3>
+                        <p>contato@coisasinuteis.com</p>
+                        <p>suporte@coisasinuteis.com</p>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>📱 Telefone</h3>
+                        <p>(11) 9999-INUTIL</p>
+                        <p>Seg-Sex: 10h às 18h</p>
+                        <p>(Mas provavelmente não vamos atender)</p>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>🌐 Redes Sociais</h3>
+                        <p>@coisasinuteis em todas as redes</p>
+                        <p>(Se é que isso serve pra alguma coisa)</p>
+                    </div>
+
+                    <div class="info-box" style="background: #ffeb00; color: #000; margin-top: 2rem;">
+                        <h3>⚠️ Importante</h3>
+                        <p>Qualquer reclamação sobre a inutilidade dos produtos será considerada um elogio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA DETALHES DO PRODUTO -->
+    <div id="pagina-produto" class="pagina" style="display: none;">
+        <div class="container">
+            <div class="produto-detalhes">
+                <div class="produto-imagem-grande">
+                    <div id="produto-emoji" style="font-size: 8rem;"></div>
+                </div>
+
+                <div class="produto-info">
+                    <h2 id="produto-nome"></h2>
+                    <div class="preco-grande" id="produto-preco"></div>
+                    
+                    <div class="produto-descricao">
+                        <h3>Descrição do Produto</h3>
+                        <div id="produto-descricao-texto"></div>
+                    </div>
+
+                    <div class="produto-caracteristicas">
+                        <h3>Características</h3>
+                        <ul id="produto-caracteristicas-lista"></ul>
+                    </div>
+
+                    <div class="produto-avaliacoes">
+                        <h3>Avaliações dos Clientes</h3>
+                        <div id="produto-avaliacoes-lista"></div>
+                    </div>
+
+                    <button class="btn" style="font-size: 1.2rem; padding: 1.5rem;" onclick="alert('Produto adicionado ao carrinho imaginário!')">COMPRAR AGORA</button>
+                    <button class="btn-secundario" onclick="voltarProdutos()">Voltar aos Produtos</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Coisas Inúteis - Tornando o mundo mais absurdo, um produto inútil por vez</p>
+        <p style="margin-top: 1rem; color: #666;">Nenhum produto foi útil na criação deste site</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
