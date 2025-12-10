@@ -1,0 +1,30 @@
+body {
+  background-color: #ffffff;
+  font-family: 'Times New Roman', serif;
+  color: #000000;
+  margin: 20px;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 20px;
+  margin-top: 0;
+  color: #111;
+}
+
+img {
+  width: 300px;
+  margin-top: 15px;
+}
+
+a {
+  display: block;
+  margin-top: 15px;
+  color: blue;
+  text-decoration: underline;
+  font-size: 18px;
+}
