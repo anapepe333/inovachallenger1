@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Useless Things Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .aviso {
+            background: #ffeb00;
+            color: #000;
+            text-align: center;
+            padding: 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: rgba(0,0,0,0.3);
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            color: #ffeb00;
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .destaque {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .destaque h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .produtos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .produto-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .produto-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        /* --- NEW CSS FOR IMAGE FRAMES --- */
+        .image-frame {
+            width: 100%;
+            height: 200px; /* Fixed height for uniformity */
+            background-color: #f8f9fa; /* Light grey background */
+            border: 2px dashed #ccc; /* Dashed border for the 'frame' look */
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Style for the image inside the frame */
+        .image-frame img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .produto-card:hover .image-frame img {
+            transform: scale(1.1);
+        }
+
+        /* Fallback text if image is broken */
+        .image-frame::after {
+            content: "Image Missing";
+            position: absolute;
+            font-size: 0.8rem;
+            color: #999;
+            z-index: 0;
+        }
+        .image-frame img {
+            z-index: 1; /* Sits on top of the fallback text */
+            position: relative;
+        }
+        /* -------------------------------- */
+
+        .produto-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .produto-card p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .preco {
+            font-size: 1.8rem;
+            color: #f5576c;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-secundario {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-left: 1rem;
+        }
+
+        .btn-secundario:hover {
+            background: #5a6268;
+            transform: scale(1.05);
+        }
+
+        .sobre-content {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+        }
+
+        .sobre-box {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .sobre-box h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .sobre-box p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .sobre-box ul {
+            margin-left: 2rem;
+            color: #555;
+        }
+
+        .sobre-box li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .contato-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contato-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .contato-form h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .contato-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .info-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .info-box p {
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-details {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .product-image-large {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 4px dashed #ccc; /* Frame for the large image too */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+        }
+        
+        .product-image-large img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-info h2 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .price-large {
+            font-size: 2.5rem;
+            color: #f5576c;
+            font-weight: bold;
+            margin: 1.5rem 0;
+        }
+
+        .product-description,
+        .product-features,
+        .product-reviews {
+            margin: 2rem 0;
+        }
+
+        .product-description h3,
+        .product-features h3,
+        .product-reviews h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .product-features ul {
+            margin-left: 1.5rem;
+            color: #555;
+        }
+
+        .product-features li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .product-description p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: rgba(0,0,0,0.3);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .contato-grid,
+            .product-details {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="aviso">⚠️ WARNING: These products are completely useless! ⚠️</div>
+    
+    <header>
+        <h1>🗑️ Useless Things 🗑️</h1>
+        <p class="tagline">The perfect place to spend your money on absolutely nothing useful</p>
+    </header>
+
+    <nav>
+        <a href="#" onclick="showPage('home'); return false;">Home</a>
+        <a href="#" onclick="showPage('products'); return false;">Products</a>
+        <a href="#" onclick="showPage('about'); return false;">About</a>
+        <a href="#" onclick="showPage('contact'); return false;">Contact</a>
+    </nav>
+
+    <div id="page-home" class="page active">
+        <div class="container">
+            <div class="destaque">
+                <h2>🎉 UNMISSABLE PROMOTION! 🎉</h2>
+                <p>Buy something useless today and get the feeling of instant regret!</p>
+            </div>
+
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">Our Most Useless Products</h2>
+
+            <div class="produtos" id="products-home"></div>
+        </div>
+    </div>
+
+    <div id="page-products" class="page">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;">Complete Catalog of Useless Items</h2>
+            <div class="produtos" id="products-catalog"></div>
+        </div>
+    </div>
+
+    <div id="page-about" class="page">
+        <div class="container">
+            <div class="sobre-content">
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">About Us</h2>
+                
+                <div class="sobre-box">
+                    <h3>Our Story</h3>
+                    <p>The Useless Things Store was born from an absurd idea: what if we sold only completely useless products? Since 2024, we have been dedicated to curating the most extraordinary useless items on the planet.</p>
+                    <p>Our mission is simple: make you question your purchasing decisions while laughing at yourself. Each product in our catalog has been carefully selected for its total lack of practical utility.</p>
+                </div>
+
+                <div class="sobre-box">
+                    <h3>Why Do We Exist?</h3>
+                    <p>Because not everything in life needs to be useful. We live in a world obsessed with productivity and functionality. We offer the opposite: a break to appreciate the absurd, the unnecessary, the magnificently useless.</p>
+                    <p>Our products are perfect for:</p>
+                    <ul>
+                        <li>Embarrassing secret Santa gifts</li>
+                        <li>Extreme minimalist decoration</li>
+                        <li>Collectors of purposeless objects</li>
+                        <li>People with money to spare</li>
+                        <li>Those who want to make someone laugh (or cry)</li>
+                    </ul>
+                </div>
+
+                <div class="sobre-box">
+                    <h3>Our Philosophy</h3>
+                    <p>"If it's good for nothing, then it's good for us." - Anonymous Founder</p>
+                    <p>We believe that the value of an object isn't necessarily in its usefulness. Sometimes something is valuable simply for existing and making you smile at its complete uselessness.</p>
+                </div>
+
+                <div class="sobre-box">
+                    <h3>Uselessness Guarantee</h3>
+                    <p>All our products come with our exclusive guarantee: if you find any usefulness in the product, we are not responsible. Uselessness is not a defect, it's a feature!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-contact" class="page">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">Get in Touch</h2>
+            
+            <div class="contato-grid">
+                <div class="contato-form">
+                    <h3>Send Your Useless Message</h3>
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Subject:</label>
+                        <input type="text" placeholder="What useless thing brought you here?">
+                    </div>
+                    <div class="form-group">
+                        <label>Message:</label>
+                        <textarea rows="6" placeholder="Write your message here..."></textarea>
+                    </div>
+                    <button class="btn" onclick="alert('Message sent to the void! (we have no server)')">Send Message</button>
+                </div>
+
+                <div class="contato-info">
+                    <div class="info-box">
+                        <h3>📍 Location</h3>
+                        <p>Useless Street, 404</p>
+                        <p>Absurd District</p>
+                        <p>São Paulo - SP</p>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>📧 Email</h3>
+                        <p>contact@uselessthings.com</p>
+                        <p>support@uselessthings.com</p>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>📱 Phone</h3>
+                        <p>(11) 9999-USELESS</p>
+                        <p>Mon-Fri: 10am to 6pm</p>
+                        <p>(But we probably won't answer)</p>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>🌐 Social Media</h3>
+                        <p>@uselessthings on all networks</p>
+                        <p>(If that's even useful for anything)</p>
+                    </div>
+
+                    <div class="info-box" style="background: #ffeb00; color: #000; margin-top: 2rem;">
+                        <h3>⚠️ Important</h3>
+                        <p>Any complaint about the uselessness of the products will be considered a compliment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-product" class="page">
+        <div class="container">
+            <div class="product-details">
+                <div class="product-image-large" id="product-img-container">
+                    </div>
+
+                <div class="product-info">
+                    <h2 id="product-name"></h2>
+                    <div class="price-large" id="product-price"></div>
+                    
+                    <div class="product-description">
+                        <h3>Product Description</h3>
+                        <div id="product-description-text"></div>
+                    </div>
+
+                    <div class="product-features">
+                        <h3>Features</h3>
+                        <ul id="product-features-list"></ul>
+                    </div>
+
+                    <div class="product-reviews">
+                        <h3>Customer Reviews</h3>
+                        <div id="product-reviews-list"></div>
+                    </div>
+
+                    <button class="btn" style="font-size: 1.2rem; padding: 1.5rem;" onclick="alert('Product added to imaginary cart!')">BUY NOW</button>
+                    <button class="btn-secundario" onclick="backToProducts()">Back to Products</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Useless Things - Making the world more absurd, one useless product at a time</p>
+        <p style="margin-top: 1rem; color: #ccc;">No useful products were harmed in the creation of this website</p>
+    </footer>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: 'Pet Rock',
+                description: 'A rock. Literally just a rock. But it comes in a fancy box!',
+                price: '$29.99',
+                features: ['Does nothing', 'Requires no maintenance', 'Never dies', 'Perfect conversation piece'],
+                reviews: [
+                    '⭐⭐⭐⭐⭐ "Best purchase ever! My rock just sits there. Amazing!" - John',
+                    '⭐⭐⭐⭐ "Lost a star because it\'s TOO quiet" - Sarah'
+                ]
+            },
+            {
+                id: 2,
+                name: 'Banana Holder',
+                description: 'Because your banana deserves a throne. Holds exactly one banana.',
+                price: '$15.99',
+                features: ['Banana-shaped', 'Holds one banana', 'Makes bananas feel special', 'Not dishwasher safe'],
+                reviews: [
+                    '⭐⭐⭐⭐⭐ "My banana has never been happier!" - Mike',
+                    '⭐⭐⭐ "Doesn\'t work with plantains. Disappointing." - Ana'
+                ]
+            },
+            {
+                id: 3,
+                name: 'USB Pet Rock',
+                description: 'It\'s a rock. With a USB cable. Still does nothing, but now it\'s technological!',
+                price: '$39.99',
+                features: ['Plugs into USB', 'Still does nothing', 'LED that blinks for no reason', 'Future is now'],
+                reviews: [
+                    '⭐⭐⭐⭐⭐ "Finally, a rock for the digital age!" - Tech Tom',
+                    '⭐⭐ "Doesn\'t charge my phone. 2/5" - Confused Carl'
+                ]
+            },
+            {
+                id: 4,
+                name: 'Empty Box',
+                description: 'A premium quality empty box. Nothing inside. That\'s the whole point.',
+                price: '$24.99',
+                features: ['Completely empty', 'High quality cardboard', 'Can be opened and closed', 'Echoes when you yell into it'],
+                reviews: [
+                    '⭐⭐⭐⭐⭐ "Exactly what I expected: nothing!" - Happy Harry',
+                    '⭐⭐⭐⭐ "My cat loves it more than I do" - Melissa'
+                ]
+            },
+            {
+                id: 5,
+                name: 'Invisible Ink Pen',
+                description: 'Write secret messages that even you can\'t read! The ink is SO invisible.',
+                price: '$12.99',
+                features: ['100% invisible ink', 'No special light reveals it', 'Perfect for secrets', 'Environmentally friendly (uses no ink)'],
+                reviews: [
+                    '⭐⭐⭐⭐⭐ "Wrote my whole diary. No one can read it. Perfect!" - Secret Sam',
+                    '⭐ "I think mine is broken. Can\'t see anything I write." - Naive Nancy'
+                ]
+            },
+            {
+                id: 6,
+                name: 'Counter-clockwise Clock',
+                description: 'Tells time backwards. Because who needs to know the correct time anyway?',
+                price: '$34.99',
+                features: ['Runs counterclockwise', 'Always technically wrong', 'Makes you late', 'Conversation starter'],
+                reviews: [
+                    '⭐⭐⭐⭐ "I\'m never on time anymore. Love it!" - Tardy Tim',
+                    '⭐⭐⭐⭐⭐ "Time is a construct anyway" - Philosophical Phil'
+                ]
+            },
+            {
+                id: 7,
+                name: 'Quintic Formula',
+                description: 'A printed copy of the solution to quintic equations. Spoiler: there isn\'t one!',
+                price: '$49.99',
+                features: ['Mathematically impossible', 'Blank pages (because it doesn\'t exist)', 'Bound in premium leather', 'Makes you look smart'],
+                reviews: [
+                    '⭐⭐⭐⭐⭐ "Finally solved my quintic equation! (I didn\'t)" - Math Matt',
+                    '⭐⭐⭐⭐⭐ "Abel and Galois would be proud of this joke" - Professor Nerd'
+                ]
+            },
+            {
+                id: 8,
+                name: 'Air Plush',
+                description: 'A plush toy filled with... air. That\'s it. Just air in a fabric shell.',
+                price: '$18.99',
+                features: ['100% air filling', 'Incredibly lightweight', 'Hypoallergenic (it\'s literally air)', 'Comes deflated for easy shipping'],
+                reviews: [
+                    '⭐⭐⭐⭐⭐ "My kid loves it! Or the air inside it. Not sure." - Confused Parent',
+                    '⭐⭐⭐ "Expected more air. Only got regular amount of air." - Disappointed Dave'
+                ]
+            },
+            {
+                id: 9,
+                name: 'Silent Whistle',
+                description: 'A whistle that produces absolutely no sound. Perfect for silent discos!',
+                price: '$21.99',
+                features: ['Produces 0 decibels', 'Won\'t annoy neighbors', 'Great for mimes', 'Doubles as a regular stick'],
+                reviews: [
+                    '⭐⭐⭐⭐⭐ "Can\'t hear a thing! Exactly as advertised!" - Quiet Quinn',
+                    '⭐⭐⭐⭐ "My dog doesn\'t respond to it at all. Success!" - Dog Owner Dan'
+                ]
+            }
+        ];
+
+        // Function to convert Product Name to filename (e.g., "Pet Rock" -> "pet-rock.png")
+        function getImageName(name) {
+            return name.toLowerCase()
+                       .replace(/\s+/g, '-') // Replace spaces with hyphens
+                       .replace(/[^a-z0-9-]/g, '') + '.png'; // Remove special chars and add .png
+        }
+
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const targetPage = document.getElementById('page-' + page);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+        }
+
+        function renderProducts(containerId, productsList) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            container.innerHTML = productsList.map(product => {
+                const imgFilename = getImageName(product.name);
+                return `
+                <div class="produto-card" onclick="showProductDetails(${product.id})">
+                    <div class="image-frame">
+                        <img src="${imgFilename}" alt="${product.name}" onerror="this.style.display='none'">
+                    </div>
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <div class="preco">${product.price}</div>
+                    <button class="btn" onclick="event.stopPropagation(); alert('Added to imaginary cart!')">Add to Cart</button>
+                </div>
+            `}).join('');
+        }
+
+        function showProductDetails(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const imgFilename = getImageName(product.name);
+            
+            // Replaced the emoji textContent with an HTML image tag
+            document.getElementById('product-img-container').innerHTML = 
+                `<img src="${imgFilename}" alt="${product.name}" onerror="this.style.opacity='0.3'">`;
+                
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-price').textContent = product.price;
+            document.getElementById('product-description-text').innerHTML = `<p>${product.description}</p>`;
+            document.getElementById('product-features-list').innerHTML = 
+                product.features.map(f => `<li>${f}</li>`).join('');
+            document.getElementById('product-reviews-list').innerHTML = 
+                product.reviews.map(r => `<p style="margin-bottom: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px;">${r}</p>`).join('');
+            
+            showPage('product');
+        }
+
+        function backToProducts() {
+            showPage('products');
+        }
+
+        // Initialize products on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts('products-home', products.slice(0, 3));
+            renderProducts('products-catalog', products);
+        });
+
+        renderProducts('products-home', products.slice(0, 3));
+        renderProducts('products-catalog', products);
+    </script>
+</body>
+</html>
