@@ -1,0 +1,439 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0a0a0a;
+    color: #ffeb00;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+    padding: 2rem;
+    border-bottom: 4px solid #ffeb00;
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    text-shadow: 0 0 20px #ffeb00, 0 0 40px #ffeb00;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { text-shadow: 0 0 20px #ffeb00, 0 0 40px #ffeb00; }
+    50% { text-shadow: 0 0 30px #ffeb00, 0 0 60px #ffeb00, 0 0 80px #ffeb00; }
+}
+
+.tagline {
+    color: #999;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+nav {
+    background: #000;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    border-bottom: 2px solid #ffeb00;
+}
+
+nav a {
+    color: #ffeb00;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+nav a:hover {
+    border: 2px solid #ffeb00;
+    background: #ffeb00;
+    color: #000;
+    transform: scale(1.1);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.destaque {
+    background: linear-gradient(45deg, #ffeb00 0%, #ffd700 100%);
+    color: #000;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    border: 4px solid #000;
+    box-shadow: 0 0 30px #ffeb00;
+    transform: rotate(-1deg);
+}
+
+.destaque h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.produto {
+    background: #1a1a1a;
+    border: 3px solid #ffeb00;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.produto::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, #ffeb00, transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+.produto:hover::before {
+    opacity: 0.1;
+    animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.produto:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 10px 40px #ffeb00;
+    border-color: #fff;
+}
+
+.produto-img {
+    width: 100%;
+    height: 200px;
+    background: #000;
+    border: 2px solid #ffeb00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.produto h3 {
+    color: #ffeb00;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.produto p {
+    color: #999;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.preco {
+    font-size: 1.5rem;
+    color: #ffeb00;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.btn {
+    background: #ffeb00;
+    color: #000;
+    border: none;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+    font-family: 'Courier New', monospace;
+}
+
+.btn:hover {
+    background: #000;
+    color: #ffeb00;
+    border: 2px solid #ffeb00;
+    transform: scale(1.05);
+}
+
+footer {
+    background: #000;
+    color: #ffeb00;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+    border-top: 4px solid #ffeb00;
+}
+
+.aviso {
+    background: #ffeb00;
+    color: #000;
+    padding: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0.5; }
+}
+
+/* Estilos para página Sobre */
+.sobre-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.sobre-box {
+    background: #1a1a1a;
+    border: 3px solid #ffeb00;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.sobre-box h3 {
+    color: #ffeb00;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.sobre-box p {
+    color: #999;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.sobre-box ul {
+    color: #999;
+    margin-left: 2rem;
+    line-height: 2;
+}
+
+.sobre-box ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos para página Contato */
+.contato-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contato-form {
+    background: #1a1a1a;
+    border: 3px solid #ffeb00;
+    padding: 2rem;
+}
+
+.contato-form h3 {
+    color: #ffeb00;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    color: #ffeb00;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    background: #000;
+    border: 2px solid #ffeb00;
+    color: #ffeb00;
+    padding: 0.8rem;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #fff;
+    box-shadow: 0 0 10px #ffeb00;
+}
+
+.contato-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-box {
+    background: #1a1a1a;
+    border: 3px solid #ffeb00;
+    padding: 1.5rem;
+}
+
+.info-box h3 {
+    color: #ffeb00;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.info-box p {
+    color: #999;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos para página de detalhes do produto */
+.produto-detalhes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.produto-imagem-grande {
+    background: #1a1a1a;
+    border: 4px solid #ffeb00;
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    box-shadow: 0 0 30px #ffeb00;
+}
+
+.produto-info h2 {
+    color: #ffeb00;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.preco-grande {
+    font-size: 2.5rem;
+    color: #ffeb00;
+    font-weight: bold;
+    margin: 1.5rem 0;
+    text-shadow: 0 0 20px #ffeb00;
+}
+
+.produto-descricao,
+.produto-caracteristicas,
+.produto-avaliacoes {
+    background: #1a1a1a;
+    border: 3px solid #ffeb00;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.produto-descricao h3,
+.produto-caracteristicas h3,
+.produto-avaliacoes h3 {
+    color: #ffeb00;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.produto-descricao p,
+.produto-caracteristicas p {
+    color: #999;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.produto-caracteristicas ul {
+    list-style: none;
+    color: #999;
+}
+
+.produto-caracteristicas ul li {
+    margin-bottom: 0.8rem;
+    padding-left: 1rem;
+}
+
+.avaliacao {
+    background: #000;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 3px solid #ffeb00;
+}
+
+.avaliacao strong {
+    color: #ffeb00;
+    font-size: 1.2rem;
+}
+
+.avaliacao p {
+    color: #999;
+    margin-top: 0.5rem;
+}
+
+.btn-secundario {
+    background: #000;
+    color: #ffeb00;
+    border: 2px solid #ffeb00;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: all 0.3s;
+    font-family: 'Courier New', monospace;
+}
+
+.btn-secundario:hover {
+    background: #ffeb00;
+    color: #000;
+    transform: scale(1.05);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .contato-grid,
+    .produto-detalhes {
+        grid-template-columns: 1fr;
+    }
+    
+    h1 {
+        font-size: 2rem;
+        letter-spacing: 4px;
+    }
+    
+    nav {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
